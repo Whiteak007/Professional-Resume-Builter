@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Loading animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">Building Your Resume...</div>
+        </div>
+    </div>
+
+    <!--reseume container-->
+    <div class="container">
+        <div class="header-section">
+            <h1 class="main-title">Professional Resume Creator</h1>
+            <p class="subtitle">Create your perfect resume in minutes</p>
+        </div>
+
+        <div class="resume-creator">
+            <div class="form-section" id="resumeForm">
+                <div class="form-group">
+                    <label class="form-label">Profile Picture</label>
+                    <div class="profile-picture-upload">
+                        <label for="profilePicture" class="file-upload-label">
+                            <div class="file-upload-circle">
+                                <i class="fas fa-camera"></i>
+                                <span>Choose Photo</span>
+                            </div>
+                            <input type="file" id="profilePicture" accept="image/*" class="file-input">
+                        </label>
+                        <div class="preview-container hidden" id="picturePreviewContainer">
+                            <img id="picturePreview" class="profile-picture-preview" src="" alt="Profile Picture">
+                            <button class="change-photo-btn" onclick="document.getElementById('profilePicture').click()">
+                                <i class="fas fa-sync-alt"></i> Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-input" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="jobTitle" class="form-label">Professional Title</label>
+                    <input type="text" id="jobTitle" class="form-input" placeholder="Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="john.doe@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="+1 234 567 8900">
+                </div>
+                <div class="form-group">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" id="address" class="form-input" placeholder="City, Country">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin" class="form-label">LinkedIn</label>
+                    <input type="text" id="linkedin" class="form-input" placeholder="linkedin.com/in/username">
+                </div>
+                <div class="form-group">
+                    <label for="github" class="form-label">GitHub/Portfolio</label>
+                    <input type="text" id="github" class="form-input" placeholder="github.com/username">
+                </div>
+
+                <h2 class="section-title">Professional Summary</h2>
+                <div class="form-group">
+                    <textarea id="summary" class="form-input textarea-input" placeholder="Experienced professional with..."></textarea>
+                </div>
+
+                <h2 class="section-title">Work Experience</h2>
+                <div id="experienceContainer">
+                    <div class="item-group experience-item">
+                        <div class="form-group">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" class="form-input experience-position" placeholder="Senior Developer">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Company</label>
+                            <input type="text" class="form-input experience-company" placeholder="Tech Company Inc.">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration</label>
+                            <input type="text" class="form-input experience-duration" placeholder="Jan 2020 - Present">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input textarea-input experience-description" placeholder="Responsibilities and achievements..."></textarea>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(this, 'experienceContainer')">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addExperience()">
+                    <i class="fas fa-plus"></i> <span>Add Experience</span>
+                </button>
+
+                <h2 class="section-title">Projects</h2>
+                <div id="projectsContainer">
+                    <div class="item-group project-item">
+                        <div class="form-group">
+                            <label class="form-label">Project Title</label>
+                            <input type="text" class="form-input project-title" placeholder="E-commerce Platform">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Project Description</label>
+                            <textarea class="form-input textarea-input project-description" placeholder="Detailed description of the project..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tech Stack</label>
+                            <input type="text" class="form-input project-tech-stack" placeholder="JavaScript, React, Node.js">
+                            <small class="input-hint">Separate technologies with commas</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Project Link</label>
+                            <input type="text" class="form-input project-link" placeholder="https://project.example.com">
+                            <small class="input-hint">Include full URL (https://)</small>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(this, 'projectsContainer')">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addProject()">
+                    <i class="fas fa-plus"></i> <span>Add Project</span>
+                </button>
+
+                <h2 class="section-title">Education</h2>
+                <div id="educationContainer">
+                    <div class="item-group education-item">
+                        <div class="form-group">
+                            <label class="form-label">Degree</label>
+                            <input type="text" class="form-input education-degree" placeholder="Bachelor of Science">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Institution</label>
+                            <input type="text" class="form-input education-school" placeholder="University Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration</label>
+                            <input type="text" class="form-input education-duration" placeholder="2020 - 2023">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input textarea-input education-description" placeholder="Relevant coursework or achievements..."></textarea>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(this, 'educationContainer')">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addEducation()">
+                    <i class="fas fa-plus"></i> <span>Add Education</span>
+                </button>
+
+                <h2 class="section-title">Skills</h2>
+                <div id="skillsContainer">
+                    <div class="form-group">
+                        <input type="text" class="form-input skill-input" placeholder="JavaScript, React, Node.js">
+                        <small class="input-hint">Separate skills with commas</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Choose Template</label>
+                    <div class="template-selector">
+                        <div class="template-option active" data-template="classic">
+                            <div class="template-preview classic"></div>
+                            <span>Classic</span>
+                        </div>
+                        <div class="template-option" data-template="modern">
+                            <div class="template-preview modern"></div>
+                            <span>Modern</span>
+                        </div>
+                        <div class="template-option" data-template="creative">
+                            <div class="template-preview creative"></div>
+                            <span>Creative</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="generateResumeBtn" class="create-resume-btn">
+                    <i class="fas fa-file-alt"></i> Generate Resume
+                </button>
+            </div>
+
+            <div class="preview-section">
+                <h2 class="section-title">Resume Preview</h2>
+                <div class="resume-preview" id="resumePreview">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Your resume will appear here after you fill out the form and click "Generate Resume".</p>
+                    </div>
+                </div>
+                <div class="action-buttons hidden" id="actionButtons">
+                    <button class="print-btn" onclick="printResume()">
+                        <i class="fas fa-print"></i> <span>Print Resume</span>
+                    </button>
+                    <button class="download-btn" onclick="downloadResume()">
+                        <i class="fas fa-download"></i> <span>Download PDF</span>
+                    </button>
+                    <button class="edit-btn" onclick="editResume()">
+                        <i class="fas fa-edit"></i> <span>Edit Resume</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Professional Resume Creator | Made with <i class="fas fa-heart"></i> by coderak_</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
